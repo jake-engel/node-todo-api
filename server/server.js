@@ -11,6 +11,7 @@ const { User } = require('./models/user');
 const { authenticate } = require('./middleware/authenticate');
 
 const app = express();
+const port = process.env.port;
 
 app.use(bodyParser.json());
 
@@ -111,21 +112,8 @@ app.get('/users/me', authenticate, (req, res) => {
   res.send(req.user);
 })
 
-app.listen(process.env.port, () => {
-  console.log(`Started up at port ${process.env.port}`);
+app.listen(port, () => {
+  console.log(`Started up at port ${port}`);
 });
 
 module.exports = {app};
-
-
-// app.post('/users', (req, res) => {
-//   const user = new User({
-//     email: req.body.email
-//   });
-
-//   user.save().then((doc) => {
-//     res.send(doc);
-//   }, (err) => {
-//     res.status(400).send(err);
-//   });
-// });
